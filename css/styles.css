@@ -229,11 +229,11 @@ button, input[type=submit] {
     transform: scaleX(1.25);
   }
 }
-button{
+button, input[type=submit]{
   animation: condense 1s 1;
   transform: scaleX(1);
 }
-button:hover{
+button:hover, input[type=submit]:hover{
   background-color: green;
   color: white;
   animation: expand 1s 1;

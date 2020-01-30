@@ -68,7 +68,7 @@ class Phrase
      */
     public function getRandomPhrase()
     {
-        return $this->getPhrases()[rand(0, 3)];
+        return $this->getPhrases()[rand(0, 9)];
     }
 
     /**
@@ -88,7 +88,13 @@ class Phrase
             'Boldness be my friend',
             'Leave no stone unturned',
             'Broken crayons still color',
-            'The adventure begins'
+            'The adventure begins',
+            'Life is a party',
+            'Going on a beer run',
+            'Code much equals much power',
+            'Trump Twenty Twenty',
+            'Gonorrhea makes you feel the burn',
+            'You only live once'
         ];
     }
 

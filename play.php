@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>Phrase Hunter</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="js/play.js"></script>
-    <link href="css/styles.css" rel="stylesheet">
-    <link href="css/animate.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-</head>
 <?php
+session_start();
 // Autoloader to load classes on demand
 include "./inc/autoload.php";
-session_start();
 // If no phrase has been set
 if (empty($_SESSION['phrase'])) {
     // Create new Phrase object - it selects a random phrase for us on instantiation
@@ -50,25 +38,36 @@ $game = new Game($phrase);
 $game->determineCorrectIncorrectKeyPresses();
 
 ?>
-
-<body>
-<div class="main-container">
-    <h2 class="header">Phrase Hunter</h2>
-    <?php
-    if ( $game->checkForWin() || $game->checkForLose() ):
-        $game->gameOver();
-        session_destroy();
-        echo '<form id="keyboard" action="./play.php" method="post">'.
-            $game->displayResetButton().
-            '</form>';
-    else:
-        echo $phrase->addPhraseToDisplay();
-        echo '<form id="keyboard" action="./play.php" method="post">'.
-            $game->displayKeyboard().
-            '</form>';
-        echo $game->displayScore();
-    endif;
-    ?>
-</div>
-</body>
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Phrase Hunter</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="js/play.js"></script>
+        <link href="css/styles.css" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    </head>
+    <body>
+        <div class="main-container">
+            <h2 class="header">Phrase Hunter</h2>
+            <?php
+            if ( $game->checkForWin() || $game->checkForLose() ):
+                $game->gameOver();
+                session_destroy();
+                echo '<form id="keyboard" action="play.php" method="post">'.
+                    $game->displayResetButton().
+                    '</form>';
+            else:
+                echo $phrase->addPhraseToDisplay();
+                echo '<form id="keyboard" action="play.php" method="post">'.
+                    $game->displayKeyboard().
+                    '</form>';
+                echo $game->displayScore();
+            endif;
+            ?>
+        </div>
+    </body>
 </html>
